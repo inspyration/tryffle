@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from tryffleApp import views
+from uploaded_pdf import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
