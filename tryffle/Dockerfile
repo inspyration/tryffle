@@ -7,6 +7,10 @@ COPY . /app
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-EXPOSE 8000
+RUN pip install poetry
+RUN poetry config virtualenvs.create false
 
-CMD [ "python", "manage.py", "runserveur", "0.0.0.0:8000" ]
+COPY pyproject.toml pyproject.toml
+RUN poetry install --no-interaction --no-ansi
+
+RUN apt-get clean
