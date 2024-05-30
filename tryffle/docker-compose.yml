@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  tryffle_django:
+    container_name: tryffle_django
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - tryffle_rabbitmq
+      - tryffle_celery
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@tryffle_rabbitmq:5672//
+      - CELERY_RESULT_BACKEND=rpc://
+  
+  tryffle_postgres:
+    container_name: tryffle_postgres
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_DB=tryffle
+      - POSTGRES_USER=tryffle
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_PORT=5432
+    ports:
+      - "5432:5432"
+  
+  tryffle_rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  tryffle_celery:
+    container_name: tryffle_celery
+    build: .
+    command: poetry run celery -A tryffle worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - tryffle_rabbitmq
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@tryffle_rabbitmq:5672//
+      - CELERY_RESULT_BACKEND=rpc://
