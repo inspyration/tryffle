@@ -7,7 +7,7 @@ class DocumentPdfAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('text', 'number')
+    list_display = ('document', 'number')
 
 admin.site.register(DocumentPdf, DocumentPdfAdmin)
 admin.site.register(Page, PageAdmin)
