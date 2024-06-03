@@ -24,7 +24,7 @@ def page_path(instance, filename):
 # Create your models here.
 class DocumentPdf(models.Model):
     title = models.fields.CharField(max_length=100, blank=True, null=True) #obligatoire, déduit du nom du fichier, modifiagle
-    date = models.fields.DateField(blank=True, null=True) #obligatoire, saisie à la main
+    date = models.fields.DateField(blank=False, null=False) #obligatoire, saisie à la main
     file = models.FileField(upload_to=file_path) #obligatoire, uploadé à la création
     slug = models.SlugField(blank=True, null=True) #obligatoire, déduit du nom du fichier
     page_number = models.fields.IntegerField(validators=[MinValueValidator(0)], default=0) #obligatoire, déduit du fichier
@@ -34,3 +34,4 @@ class Page(models.Model):
     number = models.fields.IntegerField(validators=[MinValueValidator(0)]) #à incrémenter de 1 à chaque page de document 
     image = models.ImageField(upload_to=page_path) #obligatoire
     text = models.fields.CharField(max_length=100000) #non obligatoire
+    file_path = models.FilePathField(path='media/pages', null=True, blank=True)
