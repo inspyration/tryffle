@@ -6,8 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
-media/uploads/*
-!media/uploads/README.md
+tryffle/media/*
+!tryffle/media/README.md
 
 # Distribution / packaging
 .Python

@@ -6,6 +6,5 @@ from .tasks import process_pdf
 def home(request):
     pdf_path = "/path/to/your/pdf_file.pdf"
     
-    # Appeler la tâche en arrière-plan
     result = process_pdf.delay(pdf_path)
     return HttpResponse('<h1>Test</h1>')

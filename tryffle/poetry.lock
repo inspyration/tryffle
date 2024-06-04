@@ -300,6 +300,20 @@ yaml = ["PyYAML (>=3.10)"]
 zookeeper = ["kazoo (>=2.8.0)"]
 
 [[package]]
+name = "pdf2image"
+version = "1.17.0"
+description = "A wrapper around the pdftoppm and pdftocairo command line tools to convert PDF to a PIL Image list."
+optional = false
+python-versions = "*"
+files = [
+    {file = "pdf2image-1.17.0-py3-none-any.whl", hash = "sha256:ecdd58d7afb810dffe21ef2b1bbc057ef434dabbac6c33778a38a3f7744a27e2"},
+    {file = "pdf2image-1.17.0.tar.gz", hash = "sha256:eaa959bc116b420dd7ec415fcae49b98100dda3dd18cd2fdfa86d09f112f6d57"},
+]
+
+[package.dependencies]
+pillow = "*"
+
+[[package]]
 name = "pillow"
 version = "10.3.0"
 description = "Python Imaging Library (Fork)"
@@ -492,6 +506,24 @@ files = [
 ]
 
 [[package]]
+name = "pyocr"
+version = "0.8.5"
+description = "A Python wrapper for OCR engines (Tesseract, Cuneiform, etc)"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyocr-0.8.5-py3-none-any.whl", hash = "sha256:3a534eee5ac6ce681159d67528b8953f0f2a7a5aad8733373ea7b3e8ac13a0b4"},
+    {file = "pyocr-0.8.5.tar.gz", hash = "sha256:eff33d95032426a92640e56fa0d71b496ee531c1d341a15cc610610a7c5eac55"},
+]
+
+[package.dependencies]
+Pillow = "*"
+
+[package.extras]
+dev = ["pytest"]
+lint = ["flake8"]
+
+[[package]]
 name = "pypdf2"
 version = "3.0.1"
 description = "A pure-python PDF library capable of splitting, merging, cropping, and transforming PDF files"
@@ -613,4 +645,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "db529036e53c793ee51a5197b3387fa1a0ab334730c7cc0b1f3f16eba666dac3"
+content-hash = "555fecb08302ce93f1a95af6dff74ea49878238a687daf9978371fe7f4bc79d7"
