@@ -20,5 +20,7 @@ from uploaded_pdf import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', views.home, name='home-view'),
+    path('documents/', views.home, name='documents-view'),
+    path('documents/<int:id>/', views.pages, name='pages-view'),
+    path('pages/<int:id>/', views.page_detail, name='page-detail-view'),
 ]

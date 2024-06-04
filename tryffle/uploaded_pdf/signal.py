@@ -32,4 +32,4 @@ def save_images(sender, instance, created, **kwargs):
         else :
             save_pages.delay(instance.id)
         
-                   
+

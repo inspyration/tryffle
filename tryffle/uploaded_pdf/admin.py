@@ -9,6 +9,8 @@ class DocumentPdfAdmin(admin.ModelAdmin):
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ('document', 'number', 'file_path')
+    readonly_fields = ('file_path',)
 
 admin.site.register(DocumentPdf, DocumentPdfAdmin)
 admin.site.register(Page, PageAdmin)
+
