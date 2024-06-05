@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Inertia Test{% endblock %}</title>
+    <!-- Inclure les fichiers CSS nécessaires -->
+</head>
+<body>
+    <!-- Conteneur pour l'application Vue.js avec Inertia.js -->
+    <div id="app" data-page="{{ page | safe }}"></div>
+    <!-- Inclure le fichier JavaScript principal pour Vue.js et Inertia.js -->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

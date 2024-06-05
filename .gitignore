@@ -7,6 +7,8 @@ __pycache__/
 *.so
 
 tryffle/media/*
+tryffle/node_modules/*
+node_modules/
 !tryffle/media/README.md
 
 # Distribution / packaging

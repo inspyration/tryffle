@@ -22,4 +22,3 @@ RUN poetry config virtualenvs.create false
 
 COPY pyproject.toml pyproject.toml
 RUN poetry install --no-interaction --no-ansi
-

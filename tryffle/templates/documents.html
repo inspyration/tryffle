@@ -1,5 +1,9 @@
+{% load static %}
 <html>
-    <head><title>Merchex</title></head>
+    <head>
+        <title>Merchex</title>
+        <script src="{% static 'js/inertia.js' %}"></script>
+    </head>
     <body>
     {% block content %}
 
@@ -14,3 +18,4 @@
 {% endblock %}
     </body>
 </html>
+
