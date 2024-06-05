@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -156,3 +155,9 @@ CELERY_TIMEZONE = 'UTC'
 SAVE_FILE_PATH = True
 
 INERTIA_LAYOUT = BASE_DIR / 'templates/base.html'
+INERTIA_VERSION = '1.0' # defaults to '1.0'
+#INERTIA_LAYOUT = 'layout.html' # required and has no default
+#INERTIA_JSON_ENCODER = CustomJsonEncoder # defaults to inertia.utils.InertiaJsonEncoder
+INERTIA_SSR_URL = 'http://localhost:8000/' # defaults to http://localhost:13714/
+INERTIA_SSR_ENABLED = False # defaults to False
+

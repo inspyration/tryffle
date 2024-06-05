@@ -9,8 +9,9 @@
     <!-- Inclure les fichiers CSS nécessaires -->
 </head>
 <body>
+    <h1>TEST</h1>
     <!-- Conteneur pour l'application Vue.js avec Inertia.js -->
-    <div id="app" data-page="{{ page | safe }}"></div>
+    {% block inertia %}{% endblock inertia %}
     <!-- Inclure le fichier JavaScript principal pour Vue.js et Inertia.js -->
     <script src="{% static 'js/app.js' %}"></script>
 </body>
