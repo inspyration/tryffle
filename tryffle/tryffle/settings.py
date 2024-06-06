@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'uploaded_pdf.apps.Uploaded_pdfConfig',
     'debug_toolbar',
+    'django_vite',
+    'inertia',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
@@ -151,3 +154,9 @@ CELERY_TIMEZONE = 'UTC'
 
 
 SAVE_FILE_PATH = True
+
+INERTIA_LAYOUT= BASE_DIR / 'templates/index.html'
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static' / 'dist'
+DJANGO_VITE_DEV_SERVER_PORT = 5173
+DJANGO_VITE_DEV_MODE = False
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]

@@ -1,0 +1,23 @@
+{
+  "js/main.js": {
+    "file": "main-Bktvgyxf.js",
+    "name": "main",
+    "src": "js/main.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "js/pages/Test.vue"
+    ]
+  },
+  "js/pages/Test.vue": {
+    "file": "Test-DyJcpjc3.js",
+    "name": "Test",
+    "src": "js/pages/Test.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "js/main.js"
+    ],
+    "css": [
+      "Test-UsY54x6U.css"
+    ]
+  }
+}

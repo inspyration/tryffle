@@ -8,7 +8,7 @@ __pycache__/
 
 tryffle/media/*
 !tryffle/media/README.md
-
+tryffle/node_modules
 # Distribution / packaging
 .Python
 build/
