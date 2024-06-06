@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'uploaded_pdf.apps.Uploaded_pdfConfig',
     'debug_toolbar',
     'inertia',
+    'django_vite'
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
@@ -161,3 +163,4 @@ INERTIA_VERSION = '1.0' # defaults to '1.0'
 INERTIA_SSR_URL = 'http://localhost:8000/' # defaults to http://localhost:13714/
 INERTIA_SSR_ENABLED = False # defaults to False
 
+VITE_DEV_MODE = DEBUG
