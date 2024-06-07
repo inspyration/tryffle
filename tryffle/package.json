@@ -4,7 +4,7 @@
   "type": "module",
   "description": "A minimal, working template for Inertia + Django + Vite + Vue.",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build"
   },
   "dependencies": {
