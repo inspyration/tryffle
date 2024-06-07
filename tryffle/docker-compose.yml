@@ -4,15 +4,19 @@ services:
   tryffle_django:
     container_name: tryffle_django
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: make dev
     volumes:
       - .:/app
     ports:
       - "8000:8000"
       - "5173:5173"
     depends_on:
-      - tryffle_rabbitmq
-      - tryffle_celery
+      tryffle_rabbitmq:
+        condition: service_healthy
+      tryffle_celery:
+        condition: service_healthy
+      tryffle_postgres:
+        condition: service_healthy
     environment:
       - CELERY_BROKER_URL=amqp://guest:guest@tryffle_rabbitmq:5672//
       - CELERY_RESULT_BACKEND=rpc://
@@ -27,12 +31,23 @@ services:
       - POSTGRES_PORT=5432
     ports:
       - "5432:5432"
+    healthcheck:
+      test: pg_isready -d tryffle
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
   
   tryffle_rabbitmq:
     image: rabbitmq:3-management
     ports:
       - "5672:5672"
       - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
 
   tryffle_celery:
     container_name: tryffle_celery
@@ -41,7 +56,13 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - tryffle_rabbitmq
+      tryffle_rabbitmq:
+        condition: service_healthy
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@tryffle_rabbitmq:5672//
+      - CELERY_BROKER_URL=amqp://guest:guest@tryffle_rabbitmq:5672/
       - CELERY_RESULT_BACKEND=rpc://
+    healthcheck:
+      test: celery -b amqp://guest:guest@tryffle_rabbitmq:5672/ inspect ping
+      interval: 30s
+      timeout: 10s
+      retries: 3

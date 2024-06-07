@@ -1,22 +1,3 @@
-FROM node:16 AS node-builder
-
-# Définir le répertoire de travail pour Node.js
-WORKDIR /app
-
-# Copier les fichiers package.json et package-lock.json
-COPY package*.json ./
-
-# Installer les dépendances Node.js
-RUN npm install
-
-RUN npm install vite
-
-# Copier le reste des fichiers de l'application
-COPY . .
-
-# Exécuter le build Vite
-RUN npm run build
-
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -31,6 +12,8 @@ RUN apt-get update && apt-get install -y \
     poppler-utils \
     libpoppler-dev \
     libpoppler-cpp-dev \
+    node-npm \
+    make \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -41,3 +24,5 @@ RUN poetry config virtualenvs.create false
 
 COPY pyproject.toml pyproject.toml
 RUN poetry install --no-interaction --no-ansi
+
+RUN npm install
