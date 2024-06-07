@@ -1,0 +1,16 @@
+<html>
+    <head><title>Merchex</title></head>
+    <body>
+    {% block content %}
+
+<h1>Groupes</h1>
+
+<ul>
+ {% for doc in documents %}
+  <li> <a href="{% url 'pages-view' doc.id %}"> {{ doc.title }} </a> </li>
+ {% endfor %}
+</ul>
+
+{% endblock %}
+    </body>
+</html>

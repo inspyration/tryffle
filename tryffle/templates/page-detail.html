@@ -1,0 +1,16 @@
+<html>
+    <head><title>Merchex</title></head>
+    <body>
+    {% block content %}
+
+<h1>Page numéro {{ page.number }} du document {{ page.document.title }} </h1>
+
+<h5> Voici le texte de la page : </h5>
+
+
+<p> {{page.text}} </p>
+
+
+{% endblock %}
+    </body>
+</html>

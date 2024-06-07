@@ -60,7 +60,6 @@ def save_file_path(id):
                     directory = os.path.join(settings.MEDIA_ROOT, 'pages', str(instance.title))
                     if(not os.path.exists(directory)):
                         os.makedirs(directory)
-                    #return os.path.join('pages', str(instance.document.title), f'{instance.number}{".png"}')
                     image.save(directory + '/' + str(nb) + '.png')
                     tools = pyocr.get_available_tools()
                     tool = tools[0]
@@ -70,3 +69,4 @@ def save_file_path(id):
                     page.file_path = os.path.join(directory, f'{nb}.png')
                     page.text = txt
                     page.save()
+

@@ -1,0 +1,19 @@
+
+<html>
+    <head>
+        <title>Merchex</title>
+    </head>
+    <body>
+    {% block content %}
+
+<h1>Pages du document : {{ document.title }}</h1>
+
+<ul>
+ {% for page in document.page_set.all %}
+  <li> <a href="{% url 'page-detail-view' document.id page.number %}"> {{ page.number }} </a> </li>
+ {% endfor %}
+</ul>
+
+{% endblock %}
+    </body>
+</html>

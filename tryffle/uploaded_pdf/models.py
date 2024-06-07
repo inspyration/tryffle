@@ -35,3 +35,4 @@ class Page(models.Model):
     image = models.ImageField(upload_to=page_path) #obligatoire
     text = models.fields.CharField(max_length=100000) #non obligatoire
     file_path = models.FilePathField(path='media/pages', null=True, blank=True)
+
