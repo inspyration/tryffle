@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
     poppler-utils \
     libpoppler-dev \
     libpoppler-cpp-dev \
+    node-npm \
+    make \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -23,3 +25,4 @@ RUN poetry config virtualenvs.create false
 COPY pyproject.toml pyproject.toml
 RUN poetry install --no-interaction --no-ansi
 
+RUN npm install

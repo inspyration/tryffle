@@ -1,0 +1,6 @@
+node_modules
+static/dist
+.git
+.vscode
+__pycache__
+*.pyc
