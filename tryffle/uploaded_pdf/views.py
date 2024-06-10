@@ -4,19 +4,29 @@ from .tasks import process_pdf
 from django.conf import settings
 from uploaded_pdf.models import DocumentPdf, Page
 from inertia import render as inertia_render
+from .serializers import DocumentPdfSerializer, PageSerializer
+
 # Create your views here.
 def documents(request):   
     document = DocumentPdf.objects.all()
-    return render(request, 'documents.html', {'documents':document})
+    #return render(request, 'documents.html', {'documents':document})
+    #documents = DocumentPdf.objects.values('id', 'title', 'page_number')
+    serializer = DocumentPdfSerializer(document, many=True)
+    return inertia_render(request, "Document", props={"documents": serializer.data})
 
 def pages(request, id):
     document = DocumentPdf.objects.get(id=id)
-    return render(request, 'pages.html', {'document': document})
+    pages = document.pages().all
+    serializer = PageSerializer(pages, many=True)
+    return inertia_render(request, "Pages", {"pages": serializer.data, "title": document.title})
+    #return render(request, 'pages.html', {'document': document})
 
 def page_detail(request, document_id, id):
     document = get_object_or_404(DocumentPdf, pk=document_id)
     page = get_object_or_404(Page, document=document, number=id)
-    return render(request, 'page-detail.html', {'page': page})
+    serializer = PageSerializer(page, many=False)
+    return inertia_render(request, "Page_Detail", props={"page": serializer.data})
+    #return render(request, 'page-detail.html', {'page': page})
 
 def test(request):
     #return inertia_render(request, 'index.html')
