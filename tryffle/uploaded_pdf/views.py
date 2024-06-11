@@ -6,6 +6,8 @@ from uploaded_pdf.models import DocumentPdf, Page
 from inertia import render as inertia_render
 from uploaded_pdf.serializers import DocumentPdfSerializer, PageSerializer
 from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 # Create your views here.
 def documents(request):   
@@ -13,20 +15,21 @@ def documents(request):
     #return render(request, 'documents.html', {'documents':document})
     #documents = DocumentPdf.objects.values('id', 'title', 'page_number')
     serializer = DocumentPdfSerializer(document, many=True)
-    return inertia_render(request, "Document", props={"documents": serializer.data})
+    return inertia_render(request, "Document", props={"document": serializer.data})
+    #inertia_render(request, "Document")
 
 def pages(request, id):
     document = DocumentPdf.objects.get(id=id)
     pages = Page.objects.filter(document=document)
     serializer = PageSerializer(pages, many=True)
-    return inertia_render(request, "Pages", {"pages": serializer.data})
+    return inertia_render(request, "Pages", props={"documentId": document.id})
     #return render(request, 'pages.html', {'document': document})
 
 def page_detail(request, document_id, id):
     document = get_object_or_404(DocumentPdf, pk=document_id)
     page = get_object_or_404(Page, document=document, number=id)
     serializer = PageSerializer(page, many=False)
-    return inertia_render(request, "Page_Detail", props={"page": serializer.data})
+    return inertia_render(request, "Page_Detail", props={"pageId": page.id})
     #return render(request, 'page-detail.html', {'page': page})
 
 def test(request):
@@ -36,4 +39,13 @@ def test(request):
 class DocumentPdfViewSet(viewsets.ModelViewSet):
     queryset = DocumentPdf.objects.all()
     serializer_class = DocumentPdfSerializer
+    @action(detail=True, methods=['get'])
+    def pages(self, request, pk=None):
+        document = self.get_object()
+        pages = Page.objects.filter(document=document)
+        serializer = PageSerializer(pages, many=True)
+        return Response(serializer.data)
 
+class PageViewSet(viewsets.ModelViewSet):
+    queryset = Page.objects.all()
+    serializer_class = PageSerializer
