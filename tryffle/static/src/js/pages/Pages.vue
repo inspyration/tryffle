@@ -1,9 +1,10 @@
 <template lang="">
     <div>
-        
-        
-        <ul v-for="page in pages" :key="index">
-            <li><a :href="`page/${doc.id}/`">{{page.number}} : Cliquer pour plus de détails </a><li>
+        <h1>Test</h1>
+        <ul>
+          <li v-for="page in pages" :key="page.number">
+            <a :href="`page/${page.number}/`">Page {{ page.number }}</a>
+          </li>
         </ul>
     </div>
 </template>

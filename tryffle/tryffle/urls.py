@@ -25,6 +25,7 @@ urlpatterns = [
     path('documents/<int:id>/', views.pages, name='pages-view'),
     path('documents/<int:document_id>/page/<int:id>/', views.page_detail, name='page-detail-view'),
     path('test/', views.test, name='test-view'),
+    path('api/v1/', include('uploaded_pdf.urls'))
 ]
 
 

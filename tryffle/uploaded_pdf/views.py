@@ -4,7 +4,8 @@ from .tasks import process_pdf
 from django.conf import settings
 from uploaded_pdf.models import DocumentPdf, Page
 from inertia import render as inertia_render
-from .serializers import DocumentPdfSerializer, PageSerializer
+from uploaded_pdf.serializers import DocumentPdfSerializer, PageSerializer
+from rest_framework import viewsets
 
 # Create your views here.
 def documents(request):   
@@ -16,9 +17,9 @@ def documents(request):
 
 def pages(request, id):
     document = DocumentPdf.objects.get(id=id)
-    pages = document.pages().all
+    pages = Page.objects.filter(document=document)
     serializer = PageSerializer(pages, many=True)
-    return inertia_render(request, "Pages", {"pages": serializer.data, "title": document.title})
+    return inertia_render(request, "Pages", {"pages": serializer.data})
     #return render(request, 'pages.html', {'document': document})
 
 def page_detail(request, document_id, id):
@@ -31,3 +32,8 @@ def page_detail(request, document_id, id):
 def test(request):
     #return inertia_render(request, 'index.html')
     return inertia_render(request, "Test", props={"name": "World"})
+
+class DocumentPdfViewSet(viewsets.ModelViewSet):
+    queryset = DocumentPdf.objects.all()
+    serializer_class = DocumentPdfSerializer
+
