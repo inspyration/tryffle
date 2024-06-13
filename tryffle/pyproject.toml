@@ -20,6 +20,7 @@ pyocr = "^0.8.5"
 django-debug-toolbar = "^4.4.2"
 django-vite = "^3.0.4"
 inertia-django = "^0.6.0"
+django-filter = "^24.2"
 
 [build-system]
 requires = ["poetry-core"]

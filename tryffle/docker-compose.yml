@@ -31,12 +31,15 @@ services:
       - POSTGRES_PORT=5432
     ports:
       - "5432:5432"
+    volumes:
+      - ./init_trigramme.sql:/docker-entrypoint-initdb.d/init_trigramme.sql
     healthcheck:
       test: pg_isready -d tryffle
       interval: 30s
       timeout: 60s
       retries: 5
       start_period: 80s
+    command: ["postgres", "-c", "shared_preload_libraries=pg_trgm"]
   
   tryffle_rabbitmq:
     image: rabbitmq:3-management

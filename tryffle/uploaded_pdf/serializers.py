@@ -4,9 +4,10 @@ from .models import DocumentPdf, Page
 class DocumentPdfSerializer(serializers.ModelSerializer):
     class Meta:
         model = DocumentPdf
-        fields = ['id', 'title', 'page_number']
+        fields = '__all__'
 
 class PageSerializer(serializers.ModelSerializer):
+    document = DocumentPdfSerializer(read_only=True)
     class Meta:
         model = Page
-        fields = ['id', 'document', 'number', 'text', 'file_path']
+        fields = '__all__'
