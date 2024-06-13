@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'uploaded_pdf.apps.Uploaded_pdfConfig',
+    'lists.apps.ListsConfig',
     'debug_toolbar',
     'django_vite',
     'inertia',

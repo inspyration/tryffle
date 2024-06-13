@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   tryffle_django:
     container_name: tryffle_django
