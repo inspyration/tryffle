@@ -9,6 +9,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import filters
+from django.contrib.postgres.search import TrigramSimilarity
 
 # Create your views here.
 def documents(request):   
@@ -40,6 +41,9 @@ def test(request):
 def search(request):
     return inertia_render(request, "Search", props={})
 
+def trigramme_search(request):
+    return inertia_render(request, "Trigramme_Search", props={})
+
 class DocumentPdfViewSet(viewsets.ModelViewSet):
     queryset = DocumentPdf.objects.all()
     serializer_class = DocumentPdfSerializer
@@ -54,4 +58,22 @@ class PageViewSet(viewsets.ModelViewSet):
     queryset = Page.objects.all()
     serializer_class = PageSerializer
     filter_backends = [filters.SearchFilter]
+    search_fields = ['text']
+
+class TrigramSearchFilter(filters.SearchFilter):
+    def filter_queryset(self, request, queryset, view):
+        search_query = request.query_params.get(self.search_param, '').strip()
+        with open('truc.txt', 'a') as fichier:
+            fichier.write(str(search_query))
+        if search_query:
+            queryset = queryset.annotate(
+                similarity=TrigramSimilarity('text', search_query),
+            ).filter(similarity__gt=0).order_by('-similarity')
+        return queryset
+
+
+class TrigramPageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Page.objects.all()
+    serializer_class = PageSerializer
+    filter_backends = [TrigramSearchFilter]
     search_fields = ['text']
