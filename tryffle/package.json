@@ -11,6 +11,13 @@
     "@inertiajs/vue3": "^1.0.14",
     "@types/node": "^20.10.5",
     "@vitejs/plugin-vue": "^5.0.0",
+    "datatables.net-buttons": "^3.0.2",
+    "datatables.net-buttons-dt": "^3.0.2",
+    "datatables.net-dt": "^2.0.8",
+    "datatables.net-responsive-dt": "^3.0.2",
+    "datatables.net-select": "^2.0.3",
+    "datatables.net-select-dt": "^2.0.3",
+    "datatables.net-vue3": "^3.0.1",
     "vite": "^5.2.12",
     "vue": "^3.4.0"
   }
