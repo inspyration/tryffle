@@ -22,6 +22,9 @@ services:
       - CELERY_RESULT_BACKEND=rpc://
   
   tryffle_postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.init_trgrm
     container_name: tryffle_postgres
     image: postgres:14.6-alpine
     environment:
