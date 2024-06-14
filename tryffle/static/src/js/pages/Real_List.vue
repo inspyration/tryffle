@@ -6,7 +6,6 @@ import 'datatables.net-buttons/js/buttons.html5';
 import 'datatables.net-responsive';
 import 'datatables.net-select';
 import 'datatables.net-select';
-import 'tailwindcss';
 
 DataTable.use(DataTablesCore);
 
@@ -72,5 +71,4 @@ const options = {
 @import 'datatables.net-buttons-dt';
 @import 'datatables.net-responsive-dt';
 @import 'datatables.net-select-dt';
-@import 'tailwindcss';
 </style>
