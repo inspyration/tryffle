@@ -11,9 +11,20 @@
     {% vite_asset 'js/main.js' %}
 
     <title>Tryffle</title>
+    
   </head>
 
   <body>
+    <p class="text-blue-500"> test </p>
+    <div class="menu">
+      <a href="http://localhost:8000/search/" class="text-blue">Recherche</a>
+      <a href="http://localhost:8000/trigramme/">Recherche par Trigramme</a>
+      <a href="http://localhost:8000/documents/">Liste des documents</a>
+      <a href="#contact">Contact</a>
+  </div>
+  <div class="content">
     {% block inertia %}{% endblock %}
+  </div>
   </body>
 </html>
+
