@@ -3,7 +3,7 @@
         <h1>ENCORE UN TEST</h1>
         <h1>Page numéro {{ page.number }} du document {{document.title}} </h1>
         <h5> Voici le texte de la page : </h5>
-        <p> {{page.text}} </p>
+        <p class="text-blue"> {{page.text}} </p>
     </div>
 </template>
 <script>
