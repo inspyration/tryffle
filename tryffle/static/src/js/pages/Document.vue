@@ -1,10 +1,12 @@
 <template lang="">
     <div>
-        <h1>Voici la liste de tous les documents enregistrés</h1>
-        <div v-for="doc in documents" :key="index">
-            <h2> {{doc.title}} </h2>
-            <a :href="`${doc.id}/`">Cliquer pour plus de détails concernant les pages de ce documents</a>
-        </div>
+        <h1 class="text-blue-500">Voici la liste de tous les documents enregistrés</h1>
+        <div v-for="(doc, index) in documents" :key="index" class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title">{{ doc.title }}</h2>
+        <a :href="`${doc.id}/`" class="btn btn-primary">Cliquer pour plus de détails concernant les pages de ce document</a>
+      </div>
+    </div>
     </div>
 </template>
 <script>

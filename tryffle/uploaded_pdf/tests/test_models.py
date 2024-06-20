@@ -1,33 +1,45 @@
-#Mock(spec=django.core.files.File); mock_file.read.return_value = "fake file contents"
-from django.test import TestCase, override_settings
-from uploaded_pdf.models import DocumentPdf, Page
-from unittest.mock import patch, MagicMock
-from uploaded_pdf import signal
-from uploaded_pdf.signal import pre_save_document_pdf, save_images
-from django.db.models.signals import pre_save, post_save
-from django.core.files import File
-import tempfile
-from pathlib import Path
-from unittest import mock
 from datetime import date
-from django.core.files.uploadedfile import SimpleUploadedFile
-from io import BytesIO
-from django.core.files import File
-from django.core.files.base import ContentFile
+from pathlib import Path
 
-# Create your tests here.
+from factory.django import mute_signals
+from django.core.files.base import ContentFile
+from django.db.models.signals import pre_save, post_save
+from django.test import TestCase, override_settings
+
+from uploaded_pdf.models import DocumentPdf, Page
+
 class UploadedPdfTest(TestCase):
 
-    def test_model(self):
-    
+    @mute_signals(pre_save, post_save)
+    def test_model_without_signals(self):
         model = DocumentPdf(
             date=date(2024, 6, 18),
-            file=ContentFile(b"jeijdeij", name="foo.pdf")
+            title="title",
+            slug="slug",
+            file=ContentFile(b"truc", name="foo.pdf")
         )
         import pdb; pdb.set_trace()
+        model.save()
+
+        self.assertEqual(model.title, 'title')
+        self.assertEqual(model.slug, 'slug')
+        self.assertEqual(model.date, date(2024, 6, 18))
+        self.assertTrue(model.file.path.startswith("/app/media/uploads"))
+        self.assertEqual(model.file.read(), b'truc')
+        self.assertEqual(model.page_number, 0)
+
+    def test_model_nominal(self):
+        with open(Path(".") / "uploaded_pdf" / "tests" / "assets" / "test.pdf", "rb") as f:
+            pdf_content = f.read()
+        model = DocumentPdf(
+            date=date(2024, 6, 18),
+            file=ContentFile(pdf_content, name="test.pdf"),
+        )
+        model.save()
+
         self.assertEqual(model.title, 'test')
         self.assertEqual(model.slug, 'test')
-        self.assertEqual(model.page_number, 2)
         self.assertEqual(model.date, date(2024, 6, 18))
-        self.assertEqual(model.file, mock_pdf_file)
-        
+        self.assertTrue(model.file.path.startswith("/app/media/uploads"))
+        self.assertEqual(model.file.read(), pdf_content)
+        self.assertEqual(model.page_number, 2)

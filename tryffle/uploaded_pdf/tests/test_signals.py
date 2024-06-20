@@ -10,7 +10,6 @@ from pathlib import Path
 from unittest import mock
 from datetime import date
 from django.core.files.uploadedfile import SimpleUploadedFile
-from stringio import StringIO
 
 # Create your tests here.
 class UploadedPdfTest(TestCase):

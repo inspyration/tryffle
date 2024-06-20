@@ -27,7 +27,10 @@ RUN poetry install --no-interaction --no-ansi
 
 COPY package.json package-lock.json /app/
 RUN npm install
-RUN npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
-RUN npx tailwindcss init
+
 COPY . .
 RUN npm run build
+RUN npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+RUN npx tailwindcss init
+RUN npm install bootstrap
+RUN npm install @popperjs/core
