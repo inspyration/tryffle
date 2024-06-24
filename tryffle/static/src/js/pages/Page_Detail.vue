@@ -1,10 +1,10 @@
 <template lang="">
-    <div>
-        <h1>Page numéro {{ page.number }} du document {{document.title}} </h1>
-        <h5> Voici le texte de la page : </h5>
-        <p class="text-blue"> {{page.text}} </p>
+    <div class="container mt-5">
+      <h1 class="text-primary mb-4">Page numéro {{ page.number }} du document {{ document.title }}</h1>
+      <h5 class="mb-3">Voici le texte de la page :</h5>
+      <p class="text-info"> {{ page.text }} </p>
     </div>
-</template>
+  </template>
 <script>
 export default {
     props:{

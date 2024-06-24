@@ -18,7 +18,6 @@ class UploadedPdfTest(TestCase):
             slug="slug",
             file=ContentFile(b"truc", name="foo.pdf")
         )
-        import pdb; pdb.set_trace()
         model.save()
 
         self.assertEqual(model.title, 'title')

@@ -1,18 +1,29 @@
 <template>
-    <div>
-      <input v-model="searchQuery" @keyup.enter="searchTrigram" placeholder="Rechercher par trigramme..." />
-      <button @click="searchTrigram">Rechercher</button>
-      <ul v-if="pages.length > 0">
-        <li v-for="page in pages" :key="page.id">
-        <h3>Page {{ page.number }}</h3>
+  <div class="container mt-5">
+    <div class="input-group mb-3">
+      <input 
+        v-model="searchQuery" 
+        @keyup.enter="searchTrigram" 
+        placeholder="Rechercher par trigramme..." 
+        class="form-control"
+      />
+      <div class="input-group-append">
+        <button @click="searchTrigram" class="btn btn-primary">Rechercher</button>
+      </div>
+    </div>
+
+    <ul v-if="pages.length > 0" class="list-group">
+      <li v-for="page in pages" :key="page.id" class="list-group-item mb-3">
+        <h3 class="text-secondary">Page {{ page.number }}</h3>
         <p>{{ page.text }}</p>
-        <h4>Document: {{ page.document.title }}</h4>
+        <h4 class="text-info">Document: {{ page.document.title }}</h4>
         <p>{{ page.document.description }}</p>
       </li>
-      </ul>
-      <p v-else>Aucun résultat pour la recherche du mot : {{searchQuery }}</p>
-    </div>
-  </template>
+    </ul>
+
+    <p v-else class="text-danger">Aucun résultat pour la recherche du mot : {{ searchQuery }}</p>
+  </div>
+</template>
   
   <script>
   export default {
