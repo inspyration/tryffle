@@ -26,7 +26,8 @@ urlpatterns = [
     path('documents/<int:document_id>/page/<int:page_id>/', views.page_detail, name='page-detail-view'),
     path('test/', views.test, name='test-view'),
     path('search/', views.search, name='search-view'),
-    path('api/v1/', include('uploaded_pdf.urls'))
+    path('api/v1/', include('uploaded_pdf.urls')),
+    path('seb/', include('lists.urls')),
 ]
 
 
