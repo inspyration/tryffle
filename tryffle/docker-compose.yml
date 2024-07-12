@@ -20,7 +20,7 @@ services:
     environment:
       - CELERY_BROKER_URL=amqp://guest:guest@tryffle_rabbitmq:5672//
       - CELERY_RESULT_BACKEND=rpc://
-  
+
   tryffle_postgres:
     build:
       context: .
@@ -40,7 +40,7 @@ services:
       timeout: 60s
       retries: 5
       start_period: 80s
-  
+
   tryffle_rabbitmq:
     image: rabbitmq:3-management
     ports:
