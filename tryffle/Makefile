@@ -1,8 +1,6 @@
-##
-# Project Title
 #
-# @file
-# @version 0.1
+# Tryffle
+#
 MAKEFLAGS+="-j 2"
 
 dev-python:

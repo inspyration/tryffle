@@ -1,9 +1,5 @@
 FROM python:3.12-slim
 
-WORKDIR /app
-
-COPY . /app
-
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     tesseract-ocr-fra \
@@ -17,10 +13,13 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip
+RUN <<EOF
+    pip install --upgrade pip
+    pip install poetry
+    poetry config virtualenvs.create false
+EOF
 
-RUN pip install poetry
-RUN poetry config virtualenvs.create false
+WORKDIR /app
 
 COPY pyproject.toml pyproject.toml
 RUN poetry install --no-interaction --no-ansi
