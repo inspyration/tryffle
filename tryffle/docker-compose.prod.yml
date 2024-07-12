@@ -1,3 +1,5 @@
+# this production does not run any postgres service it uses the common one https://github.com/pyseed/inspy_pg
+
 services:
   tryffle_django:
     container_name: tryffle_django
@@ -18,25 +20,6 @@ services:
       CELERY_RESULT_BACKEND: rpc://
     networks:
       - internal
-
-  tryffle_postgres:
-    container_name: tryffle_postgres
-    image: postgres:14.6-alpine
-    environment:
-      POSTGRES_DB:
-      POSTGRES_USER:
-      POSTGRES_PASSWORD:
-      POSTGRES_PORT: "5432"
-    volumes:
-      - postgresdata:/var/lib/postgresql/data
-    networks:
-      - internal
-    healthcheck:
-      test: pg_isready -d tryffle
-      interval: 30s
-      timeout: 60s
-      retries: 5
-      start_period: 80s
 
   tryffle_rabbitmq:
     image: rabbitmq:3-management
@@ -79,20 +62,20 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
     # uncomment for local testing
-    # DO NOT ACTIVE ON STAGING SERVER
+    # DO NOT ACTIVE ON PRODUCTION SERVER
     # ports:
     #  - "8080:80"
     networks:
       - internal
       - external
     # comment traefik labels for local testing
-    # KEEP THEM ON STAGING SERVER (uses https://github.com/pyseed/inspy_traefik)
+    # KEEP THEM ON PRODUCTION SERVER (uses https://github.com/pyseed/inspy_traefik)
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.tryffle-web.rule=Host(`tryffle.inspyration.fr`)"
+      - "traefik.http.routers.tryffle-web.rule=Host(`data.lunelvielalternative.com`)"
       - "traefik.http.routers.tryffle-web.entrypoints=web"
       - "traefik.http.routers.tryffle-web.middlewares=traefik-redirect"
-      - "traefik.http.routers.tryffle-websecured.rule=Host(`tryffle.inspyration.fr`)"
+      - "traefik.http.routers.tryffle-websecured.rule=Host(`data.lunelvielalternative.com`)"
       - "traefik.http.routers.tryffle-websecured.entrypoints=websecure"
       - "traefik.http.routers.tryffle-websecured.tls=true"
       - "traefik.http.routers.tryffle-websecured.tls.certresolver=letsencrypt"
