@@ -18,7 +18,7 @@ shell:
 
 upgrade:
 	@docker exec -it -u postgres tryffle_postgres psql -U tryffle -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
-	@docker exec -it tryffle_django python manage.py migrate
+	@docker exec -it tryffle_django python manage.py migrate --noinput
 	@docker exec -it tryffle_django python manage.py collectstatic --noinput
 
 init: upgrade

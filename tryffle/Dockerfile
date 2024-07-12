@@ -1,5 +1,10 @@
 FROM python:3.12-slim
 
+ENV DEBIAN_FRONTEND noninteractive
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV TERM xterm
+
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     tesseract-ocr-fra \
