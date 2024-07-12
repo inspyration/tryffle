@@ -5,9 +5,9 @@ services:
     command: make dev
     volumes:
       - .:/app
+    # TODO remove port pearing when staging compose file is tested from local
     ports:
       - "8000:8000"
-      - "5173:5173"
     depends_on:
       tryffle_rabbitmq:
         condition: service_healthy
@@ -29,8 +29,6 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_PORT=5432
-    ports:
-      - "5432:5432"
     volumes:
       - postgresdata:/var/lib/postgresql/data
     networks:
@@ -44,9 +42,6 @@ services:
 
   tryffle_rabbitmq:
     image: rabbitmq:3-management
-    # ports:
-    #   - "5672:5672"
-    #   - "15672:15672"
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 30s
