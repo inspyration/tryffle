@@ -3,12 +3,12 @@
     <div class="input-group mb-3">
       <input 
         v-model="searchQuery" 
-        @keyup.enter="searchPages" 
-        placeholder="Rechercher un texte..." 
+        @keyup.enter="searchTrigram" 
+        placeholder="Rechercher par trigramme..." 
         class="form-control"
       />
       <div class="input-group-append">
-        <button @click="searchPages" class="btn btn-primary">Rechercher</button>
+        <button @click="searchTrigram" class="btn btn-primary">Rechercher</button>
       </div>
     </div>
 
@@ -30,12 +30,14 @@
     data() {
       return {
         searchQuery: '',
-        pages: [], 
+        pages: [],
+        searchPerformed: false
       };
     },
     methods: {
-      searchPages() {
-        fetch(`http://localhost:8000/api/v1/pages/?search=${this.searchQuery}`)
+      searchTrigram() {
+        this.searchPerformed = true;
+        fetch(`http://localhost:8000/api/v1/trigramme_search/?search=${this.searchQuery}`)
           .then(response => {
             if (!response.ok) {
               throw new Error('Erreur lors de la récupération des pages');
@@ -44,7 +46,6 @@
           })
           .then(data => {
             this.pages = data;
-
           })
           .catch(error => {
             console.error('Erreur lors de la recherche des pages:', error);
@@ -53,6 +54,7 @@
     }
   };
   </script>
+  
   <style>
   /* Ajoutez des styles spécifiques à ce composant ici si nécessaire */
   </style>

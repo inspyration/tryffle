@@ -16,13 +16,16 @@ from PIL import Image
 
 @receiver(pre_save, sender=DocumentPdf)
 def pre_save_document_pdf(sender, instance, **kwargs):
-    if not instance.title:
-        instance.title = instance.file.name.split('/')[-1].split('.')[0]
+    if instance.file and instance.file.size > 0:
+        if not instance.title:
+            instance.title = instance.file.name.split('/')[-1].split('.')[0]
 
-    instance.slug = slugify(instance.title)
-    with BytesIO(instance.file.read()) as file:
-            reader = PyPDF2.PdfReader(file)
-            instance.page_number = len(reader.pages)
+        instance.slug = slugify(instance.title)
+        instance.file.open('rb')
+        with BytesIO(instance.file.read()) as file:
+                reader = PyPDF2.PdfReader(file)
+                instance.page_number = len(reader.pages)
+        instance.file.close()
 
 @receiver(post_save, sender=DocumentPdf)
 def save_images(sender, instance, created, **kwargs):

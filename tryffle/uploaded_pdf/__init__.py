@@ -1,0 +1,1 @@
+default_app_config = 'uploaded_pdf.apps.UploadedPdfConfig'

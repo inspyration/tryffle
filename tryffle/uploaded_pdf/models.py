@@ -8,11 +8,11 @@ def file_path(instance, filename):
     date = instance.date
     year = date.year
     month = date.month
-    directory = os.path.join(settings.MEDIA_ROOT, 'uploads', str(year), str(month))
+    directory = os.path.join('uploads', str(year), str(month))
     if(not os.path.exists(directory)):
         os.makedirs(directory)
     _, ext = os.path.splitext(filename)
-    return os.path.join('uploads', str(year), str(month), f'{uuid4()}{ext}')
+    return os.path.join(directory, f'{uuid4()}{ext}')
 
 def page_path(instance, filename):
     directory = os.path.join(settings.MEDIA_ROOT, 'pages', str(instance.document.title))

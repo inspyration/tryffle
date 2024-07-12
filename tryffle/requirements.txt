@@ -1,7 +1,0 @@
-Django>=5.0,<6.0
-djangorestframework
-PyPDF2
-Pillow
-psycopg2-binary 
-celery
-rabbitmq
