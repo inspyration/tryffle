@@ -22,9 +22,6 @@ services:
       - internal
 
   tryffle_postgres:
-    build:
-      context: .
-      dockerfile: Dockerfile.init_trgrm
     container_name: tryffle_postgres
     image: postgres:14.6-alpine
     environment:
@@ -47,9 +44,9 @@ services:
 
   tryffle_rabbitmq:
     image: rabbitmq:3-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+    # ports:
+    #   - "5672:5672"
+    #   - "15672:15672"
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 30s
